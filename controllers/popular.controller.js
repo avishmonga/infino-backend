@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
     res.status(201).send(video);
   } catch (error) {
     console.log(error);
-    return res.send("failed", error);
+    return res.status(400).send("Something Went Wrong");
   }
 });
 
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     const videos = await Popular.find({title:{$regex:new RegExp(req.query.search,"i")}}).lean().exec();
     res.status(200).send(videos);
   } catch (error) {
-    return res.send("failed", error);
+    return res.status(400).send("Something Went Wrong");
   }
 });
 
